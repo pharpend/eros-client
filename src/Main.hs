@@ -19,15 +19,20 @@ main = runBtStr =<< B.hGetContents Io.stdin
 -- |attempt to 'eitherDecode' the user input
 runBtStr :: B.ByteString -> IO ()
 runBtStr inputBt = do
-    let eitherJson = (eitherDecode inputBt) :: Either String Erosc.ClientInput
-    case eitherJson of
-      Left msg      -> B.hPutStr Io.stdout (encode msg) >> exitFailure
-      Right ecInput -> runInput ecInput
+  let eitherJson = (eitherDecode inputBt) :: Either String Erosc.ClientInput
+  case eitherJson of
+    Left msg      -> B.hPutStr Io.stderr (encode msg) >> exitFailure
+    Right ecInput -> runInput ecInput
 
 -- |This takes the 'Erosc.ClientInput' thing and processes it.
 runInput :: Erosc.ClientInput -> IO ()
 runInput ipt = do
-  result <- Erosc.processClientInput ipt
-  let jsonText = ErosJson.encode result $ Erosc.configuration ipt
-  B.hPutStr Io.stdout jsonText
+    result <- Erosc.processClientInput ipt
+    let conf      = Erosc.configuration ipt
+        outfpaths = Erosc.outputFiles conf
+        jsonText  = ErosJson.encode result conf
+        doOutputs = mapM_ (\fpath -> B.writeFile fpath jsonText) outfpaths
+    case (Erosc.quiet conf) of
+        True  -> doOutputs
+        False -> B.hPutStr Io.stdout jsonText >> doOutputs
 

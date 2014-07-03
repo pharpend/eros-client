@@ -29,10 +29,8 @@ instance FromJSON ErosList where
 
 instance FromJSON ClientConf where
   parseJSON (Object v) = ClientConf
-    <$> v .:? "ignore-stdin" .!= False
-    <*> v .:? "pretty"       .!= False
+    <$> v .:? "pretty"       .!= False
     <*> v .:? "quiet"        .!= False
-    <*> v .:? "input-files"  .!= []
     <*> v .:? "output-files" .!= []
   parseJSON _          = mzero
 

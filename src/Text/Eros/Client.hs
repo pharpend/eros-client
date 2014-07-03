@@ -31,16 +31,14 @@ data ClientOutput = ClientOutput { elScore  :: [(ErosList, Score)]
                                  }
 
 -- |Configuration for the client
-data ClientConf = ClientConf { ignoreStdin :: Bool
-                             , pretty      :: Bool
+data ClientConf = ClientConf { pretty      :: Bool
                              , quiet       :: Bool
-                             , inputFiles  :: [FilePath]
                              , outputFiles :: [FilePath]
                              }
 
 -- |No configuration.
 nullConf :: ClientConf
-nullConf = ClientConf False False False [] []
+nullConf = ClientConf True False []
 
 -- |It's convenient to think of Scores as Scores, although, they are
 -- truly ints.
