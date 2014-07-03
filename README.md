@@ -3,12 +3,12 @@
 This is a command line interface to the
 [eros library](https://github.com/pharpend/eros).
 
-# Usage - v.0.4.0.0
+# Usage - v.0.5.0.0
 
-This is a usage guide for version 0.4.0.0. There will be more up-to-date usage
+This is a usage guide for version 0.5.0.0. There will be more up-to-date usage
 guides as more versions come, hopefully.
 
-To install, run `cabal install eros-client-0.4.0.0`.
+To install, run `cabal install eros-client-0.5.0.0`.
 
 The only way to interact with the library, for the time being is through the
 client I built, `erosc`. It accepts input in Javascript Object Notation (JSON)
@@ -39,8 +39,8 @@ Here is the schema for the input:
 }
 ```
 
-That is the up-to-date schema, as of version 0.4.0.0 . It is liable to
-change. If the version you downloaded is greater than 0.4.0.0, make sure to
+That is the up-to-date schema, as of version 0.5.0.0 . It is liable to
+change. If the version you downloaded is greater than 0.5.0.0, make sure to
 check the schema (it is distributed with the package) to make sure it is up to
 date. The schema is located in `res/schemata/erosc-input.json`.
 
@@ -106,17 +106,6 @@ pretty much do whatever you want with it.
 If you have any ideas, don't hesitate to contact me.
 
 ## Planned features
-
-### `erosc` ⟶ `eros-server`
-
-As it stands, `erosc` is tedious and a bit difficult to use. I plan on rewriting
-`erosc` to act as an HTTP[s] server, using Happstack, using acid-state as a RAM
-cloud. This will be the fastest and easiest to maintain solution.
-
-I will still include an offline client, but it won't be the focus of
-development.
-
-### More options
 
 I need to add more filtering options, such as phraselist-specific thresholds,
 custom phraselists, and, well, just more stuff.
