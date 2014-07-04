@@ -27,12 +27,12 @@ runBtStr inputBt = do
 -- |This takes the 'Erosc.ClientInput' thing and processes it.
 runInput :: Erosc.ClientInput -> IO ()
 runInput ipt = do
-    result <- Erosc.processClientInput ipt
-    let conf      = Erosc.configuration ipt
-        outfpaths = Erosc.outputFiles conf
-        jsonText  = ErosJson.encode result conf
-        doOutputs = mapM_ (\fpath -> B.writeFile fpath jsonText) outfpaths
-    case (Erosc.quiet conf) of
-        True  -> doOutputs
-        False -> B.hPutStr Io.stdout jsonText >> doOutputs
+  result <- Erosc.processClientInput ipt
+  let conf         = Erosc.configuration ipt
+      outfpaths    = Erosc.outputFiles conf
+      jsonText     = ErosJson.encode result conf
+      writeOutputs = mapM_ (\fpath -> B.writeFile fpath jsonText) outfpaths
+  if (Erosc.quiet conf)
+    then B.hPutStr Io.stdout jsonText >> writeOutputs >> exitSuccess
+    else writeOutputs >> exitSuccess
 

@@ -35,6 +35,31 @@ Here is the schema for the input:
         "type": "string"
       }
     },
+    "options": {
+      "type": "object",
+      "description": "Extraneous options for erosc.",
+      "required": false,
+      "properties": {
+        "pretty": {
+          "type": "boolean",
+          "description": "Whether to pretty-print the output. Defaults to `true'.",
+          "required": false
+        },
+        "quiet": {
+          "type": "boolean",
+          "description": "Suppress output to stdout. Defauts to `false'.",
+          "required": false
+        },
+        "output-files": {
+          "type": "array",
+          "description": "A list of output file paths. Will overwrite existing files",
+          "required": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 }
 ```
